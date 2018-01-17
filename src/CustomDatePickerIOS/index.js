@@ -81,7 +81,7 @@ export default class CustomDatePickerIOS extends PureComponent {
 
   _handleDateChange = date => {
     const isWeekend = this._is_weekend (date);
-    console.log ('isWeekend', isWeekend);
+    //console.log ('isWeekend', isWeekend);
     if (isWeekend) {
       return;
     }
