@@ -76,12 +76,23 @@ export default class CustomDatePickerAndroid extends PureComponent {
           const { action: timeAction, hour, minute } = await TimePickerAndroid.open(timeOptions);
           if (timeAction !== TimePickerAndroid.dismissedAction) {
             const selectedDate = new Date(year, month, day, hour, minute);
+
+            const isWeekend = this._is_weekend(selectedDate);
+            console.log('isWeekend', isWeekend);
+            if(isWeekend){
+              return;
+            }
             this.props.onConfirm(selectedDate);
             this.props.onHideAfterConfirm(selectedDate);
           } else {
             this.props.onCancel();
           }
         } else {
+          const isWeekend = this._is_weekend(date);
+          console.log('isWeekend', isWeekend);
+          if(isWeekend){
+            return;
+          }
           this.props.onConfirm(date);
           this.props.onHideAfterConfirm(date);
         }
