@@ -10,6 +10,7 @@ export default class CustomDatePickerAndroid extends PureComponent {
     onCancel: PropTypes.func.isRequired,
     onConfirm: PropTypes.func.isRequired,
     onHideAfterConfirm: PropTypes.func,
+    disableWeekend: PropTypes.bool,
     is24Hour: PropTypes.bool,
     isVisible: PropTypes.bool,
     datePickerModeAndroid: PropTypes.oneOf(['calendar', 'spinner', 'default']),
@@ -21,6 +22,7 @@ export default class CustomDatePickerAndroid extends PureComponent {
     date: new Date(),
     mode: 'date',
     datePickerModeAndroid: 'default',
+    disableWeekend: false,
     is24Hour: true,
     isVisible: false,
     onHideAfterConfirm: () => {},
@@ -90,6 +92,14 @@ export default class CustomDatePickerAndroid extends PureComponent {
       console.warn('Cannot open date picker', message);
     }
   };
+
+  _is_weekend = (date) => {
+    const dt = new Date(date);
+    if(dt.getDay() == 6 || dt.getDay() == 0)
+      return true;
+    else
+      return false;
+  }
 
   _showTimePickerAndroid = async () => {
     try {
